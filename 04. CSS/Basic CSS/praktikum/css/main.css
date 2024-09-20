@@ -20,6 +20,9 @@ a {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* Navbar */
@@ -36,6 +39,7 @@ a {
 
 .navbar .logo {
   font-size: 24px;
+  width: 100px;
 }
 
 .navbar .nav-links {
