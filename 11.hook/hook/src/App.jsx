@@ -5,6 +5,7 @@ import ClassComponent from './ClassComponent'
 import FunctionComponent from './FunctionComponent'
 import BasicUseEffect from './useEffect/BasicUseEffect'
 import FetchData from './useEffect/FetchData'
+import Convert from './Convert'
 export default function App() {
 
   return (
@@ -12,7 +13,8 @@ export default function App() {
       {/* <ClassComponent /> */}
       {/* <hr /> */}
       {/* <BasicUseEffect /> */}
-      <FetchData />
+      {/* <FetchData /> */}
+      <Convert />
     </>
 
   )
