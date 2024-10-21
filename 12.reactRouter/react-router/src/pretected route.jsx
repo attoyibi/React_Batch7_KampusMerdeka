@@ -6,7 +6,6 @@ import NotFound from './pages/NotFound';
 import Navbar from './components/Navbar';
 import ContactUsById from './pages/ContactUsById';
 import UserById from './pages/UserById';
-import Dashboard from './pages/Dashboard';
 // import Momo from './components/Momo';
 function App() {
   return (
@@ -24,10 +23,11 @@ function App() {
             <Route path=":id" element={<UserById />} />
             <Route path="baru" element={<NewUser />} />
           </Route>
-          <Route path='/dashboard' element={<Dashboard />} />
-          {/* baru di masukkan routing yang lain */}
-          {/* <Route path=":id" element={<UserById />} />
-            <Route path="baru" element={<NewUser />} /> */}
+          <Route path='/dashboard' element={<ProtectedRoute />}>
+            {/* baru di masukkan routing yang lain */}
+            <Route path=":id" element={<UserById />} />
+            <Route path="baru" element={<NewUser />} />
+          </Route>
         </Routes>
         {/* <hr />
         <p><Link to='/contact'>balik ke halaman contact</Link></p> */}

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-
+import './app.css';
+import styles from './styles/app.module.css'
 
 function App() {
   let count = 0;
@@ -60,8 +61,11 @@ function App() {
   }
 
   return (
-    <div className='p-5'>
-      <h1 className='text-5xl pb-3 text-center'>Event Handling - {count}</h1>
+    <div >
+      <h1 className={styles.red}>Event Handling - {count}</h1>
+      <h1 className='blue'>Event Handling - {count}</h1>
+      <h1 style={{ backgroundColor: 'green', color: 'red' }}>Event Handling - {count}</h1>
+
       <form className='my-2' onSubmit={handleSubmit}>
         Contoh onSubbmit
         <input name="name" type="text" onChange={handleChange} className='border border-2' placeholder="name" />
