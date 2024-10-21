@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-
+import reactImg from './assets/react.svg'
 import './App.css'
 
 function App() {
@@ -58,6 +58,8 @@ function App() {
     <>
       <h3>img dari public</h3>
       <img src="img/vite.svg" alt="react img" />
+      <h3>img dari src</h3>
+      <img src={reactImg} alt="react img" />
       <h1>React Form Controlled data ketika live deployment</h1>
       <input name='username' type="text" onChange={handleChange} />
       <h3>Select Your Gender</h3>
