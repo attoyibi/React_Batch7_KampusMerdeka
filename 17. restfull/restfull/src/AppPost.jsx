@@ -72,6 +72,7 @@ function App() {
         <>
           <p key={index}>{index} - {data.Product}</p>
           <p>{data.price}</p>
+
           <hr></hr>
           {/* <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
             <img

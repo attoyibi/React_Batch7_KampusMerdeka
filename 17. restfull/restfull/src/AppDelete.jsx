@@ -8,15 +8,8 @@ function App() {
     Product: '',
     price: '',
   })
-  const [editUserId, setEditUserId] = useState(null);
-  const [dataEdit, setDataEdit] = useState({
-    id: '',
-    Product: '',
-    price: '',
-  });
-
   useEffect(() => {
-    // console.log("use effect");
+    console.log("use effect");
     fetchData()
   }, []);
 
@@ -24,12 +17,12 @@ function App() {
   //   console.log("fetch data");
   // }
   const fetchData = async () => {
-    // console.log("fetch data with arrow func");
+    console.log("fetch data with arrow func");
     // axios di pasang pada function
     try {
       // berjalan diawal dan ketika berhasil akan diakhiri
       const respond = await axios.get("https://6718b0277fc4c5ff8f4a92a7.mockapi.io/assets/v2/users");
-      // console.log("respond dari try", respond.data);
+      console.log("respond dari try", respond.data);
       setUser(respond.data);
     } catch (error) {
       // akan berjalan jika try mengalami error
@@ -38,7 +31,7 @@ function App() {
   };
   const postData = async (e) => {
     e.preventDefault();
-    // console.log("data yang dikirimkan", inputUser);
+    console.log("data yang dikirimkan", inputUser);
     try {
       const response = await axios.post("https://6718b0277fc4c5ff8f4a92a7.mockapi.io/assets/v2/users", inputUser);
       // tambah logikan untuk menambah data ke useState
@@ -50,7 +43,7 @@ function App() {
     }
   }
   const handleChange = (e) => {
-    // console.log("tamkap data", e.target.value);
+    console.log("tamkap data", e.target.value);
     setInputUser(
       {
         ...inputUser,
@@ -58,42 +51,15 @@ function App() {
       }
     );
   }
-  // console.log("inputUser", inputUser);
+  console.log("inputUser", inputUser);
   const handleDelete = async (idDariUser) => {
     let id = idDariUser;
     console.log("id", id);
-
     try {
       const response = await axios.delete(`https://6718b0277fc4c5ff8f4a92a7.mockapi.io/assets/v2/users/${id}`)
       fetchData();
     } catch (error) {
       console.error("error", error)
-    }
-  }
-
-  const handleChangeEdit = (e) => {
-    setDataEdit(
-      {
-        ...dataEdit,
-        [e.target.name]: e.target.value,
-      }
-    );
-  }
-  console.log("tamkap data edit", dataEdit);
-  const handleEdit = async (e) => {
-    e.preventDefault();
-    console.log("data edt", dataEdit);
-    let id = dataEdit.id;
-    let newDataEdit = {
-      Product: dataEdit.Product,
-      price: dataEdit.price,
-    }
-    try {
-      const response = await axios.put(`https://6718b0277fc4c5ff8f4a92a7.mockapi.io/assets/v2/users/${id}`, newDataEdit);
-      fetchData();
-
-    } catch (error) {
-      console.error(error);
     }
   }
   return (
@@ -111,32 +77,13 @@ function App() {
 
         <button onClick={postData}>Post Data</button>
       </form>
-      <hr />
-
-      <form onSubmit={handleEdit}>
-        <div>
-          <label>ID Edit</label>
-          <input onChange={handleChangeEdit} name="id" type="text" required></input>
-        </div>
-        <div>
-          <label>Product Edit Name</label>
-          <input onChange={handleChangeEdit} name="Product" type="text" required></input>
-        </div>
-        <div>
-          <label>Price Edit Name</label>
-          <input onChange={handleChangeEdit} name="price" type="text" required></input>
-        </div>
-        <button >Submit Edit Data</button>
-      </form>
-      <hr />
       {/* {user[3].Product} */}
       <p>{user.map((data, index) => (
         <>
-          <p key={index}>{data.id} - {data.Product}</p>
+          <p key={index}>{index} - {data.Product}</p>
           <p>{data.price}</p>
           <button style={{ backgroundColor: "red" }} onClick={() => handleDelete(data.id)}>Delete</button>
-
-
+          <hr></hr>
           {/* <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70">
             <img
               className="w-full h-auto rounded-t-xl"
@@ -158,8 +105,6 @@ function App() {
               </a>
             </div>
           </div> */}
-
-          <hr></hr>
         </>
       ))}</p>
     </>
