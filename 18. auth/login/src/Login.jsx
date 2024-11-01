@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 // import './App.css'
 // 1. buat halaman/UI nya dulu terkait login
 // 2. buat login/function pada setiap tombolnya sehingga bisa mengarahakn ke login api/yang lain
@@ -12,20 +13,35 @@ function Login() {
     setPassword(e.target.value);
     console.log("handle change");
   }
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     console.log("username = ", username);
     console.log("password = ", password);
-    if (username == "muchson" && password == "admin") {
-      // akan di arahkan ke halaman admin
-      // simpan status login pada local storage
-      localStorage.setItem("status", "true");
-      localStorage.setItem("token", "ey....");
-      alert("berhasil login in");
+
+    //contoh login statik
+    // if (username == "muchson" && password == "admin") {
+    //   localStorage.setItem("status", "true");
+    //   localStorage.setItem("token", "ey....");
+    //   alert("berhasil login in");
+    //   navigate('/dashboard')
+    // } else {
+    //   alert("username atau password salah");
+    // }
+    //contoh login dynamic
+    try {
+      const response = await axios.post("http://localhost:3000/login", {
+        username,
+        password
+      });
+      console.log(response.data);
+      localStorage.setItem('token', response.data.token);
       navigate('/dashboard')
-    } else {
-      alert("username atau password salah");
+
+    } catch (e) {
+      console.error(e.message);
+      alert(e.message);
     }
+
   }
   return (
     <>
