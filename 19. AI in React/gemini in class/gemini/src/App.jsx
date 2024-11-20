@@ -4,31 +4,9 @@
 // 4. masukkan data dari state ke dalam setting open ai
 import { useState } from 'react'
 import { GoogleGenerativeAI } from "@google/generative-ai"
-import { data } from './dataHarga'; // Sesuaikan path jika perlu
-// const data = {
-//   "hargaPasar": {
-//     "cabai": {
-//       "harga": "10 ribu",
-//       "satuan": "per kilogram"
-//     },
-//     "seblak": {
-//       "harga": "10 ribu",
-//       "satuan": "per porsi"
-//     },
-//     "geprek": {
-//       "harga": "20 ribu",
-//       "satuan": "per porsi"
-//     },
-//     "telur": {
-//       "harga": "15 ribu",
-//       "satuan": "per kilogram"
-//     },
-//     "beras": {
-//       "harga": "12 ribu",
-//       "satuan": "per kilogram"
-//     }
-//   }
-// };
+import { data } from './data/dataHarga'; // Sesuaikan path jika perlu
+import { apiKey } from './constans/config'
+import HistoryList from './components/HistoryList';
 function App() {
   const [inputUser, setInputUser] = useState("");
   const [response, setResponse] = useState("defult response");
@@ -43,13 +21,10 @@ function App() {
       parts: [{ text: "saya adalah AI tukang sayur" }],
     },
   ]);
-  function handleChange(e) {
+  function handleChangeInputPrompt(e) {
     console.log("handle change");
     setInputUser(e.target.value);
   }
-
-  // kita coba setting atau masukkan google ai 
-  const apiKey = "AIzaSyD-9Cqzq98NscZxeJGM4f0-gP3tCvvP1Ew"
 
   //inisialisasi google generativ AI dengan API key
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -98,16 +73,11 @@ Tidak boleh menjawab di luar dari data dan history yang diberikan. bahwa saya ad
   return (
     <>
       <h1>Gemini AI</h1>
-      <input type="text" onChange={handleChange} />
+      <input type="text" onChange={handleChangeInputPrompt} />
+      <input placeholder = "username" type="text" onChange={handleChange} />
       <button onClick={handlePromptSubmit} type="button">Submit</button>
       <p>{response}</p>
-      <ul>
-        {history.map((data, index) => (
-          <div key={index}>
-            <strong>{data.role === "user" ? "User" : "AI"}</strong> {data.parts[0].text}
-          </div>
-        ))}
-      </ul>
+      <HistoryList />
     </>
   )
 }
